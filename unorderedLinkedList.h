@@ -65,9 +65,10 @@ bool unorderedLinkedList<Type>::
 template <class Type>
 void unorderedLinkedList<Type>::insertFirst(const Type& newItem)
 {
-    nodeType<Type> *newNode; //pointer to create the new node
+    nodeType<Type> *newNode = new nodeType<Type>; // create the new node
 
-    newNode = new nodeType<Type>; //create the new node
+    newNode->data = new Type; // Allocate memory for the data
+                            // (because *data is now a pointer)
 
     *(newNode->data) = newItem;    //store the new item in the node
     newNode->next = head;      //insert newNode before first
@@ -84,8 +85,10 @@ template <class Type>
 void unorderedLinkedList<Type>::insertLast(const Type& newItem)
 {
     nodeType<Type> *newNode; //pointer to create the new node
-
     newNode = new nodeType<Type>; //create the new node
+
+    newNode->data = new Type; // Allocate memory for the data
+                            // (because *data is now a pointer)
 
     *(newNode->data) = newItem;  //store the new item in the node
     newNode->next = nullptr;     //set the link field of newNode
@@ -127,6 +130,9 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
             count--;
             if (head == nullptr)    //the list has only one node
                 tail = nullptr;
+
+            delete current->data;   // Delete data before deleting node
+                                    // (since *data is now dynamically allocated)
             delete current;
         }
         else //search the list for the node with the given info
@@ -157,6 +163,9 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
                                        //was the last node
                     tail = trailCurrent; //update the value 
                                          //of last
+                                         
+                delete current->data;   // Delete data before deleting node
+                                    // (since *data is now dynamically allocated)
                 delete current;  //delete the node from the list
             }
             else

@@ -236,6 +236,8 @@ void linkedListType<Type>::destroyList()
     {                          //the list
         temp = head;        //set temp to the current node
         head = head->next; //advance first to the next node
+        delete temp->data; // Delete data before deleting node
+                           // (since *data is now dynamically allocated)
         delete temp;   //deallocate the memory occupied by temp
     }
     tail = nullptr; //initialize last to nullptr; first has 
@@ -326,7 +328,11 @@ void linkedListType<Type>::copyList
             //copy the first node
         head = new nodeType<Type>;  //create the node
 
-        *(head->data) = *(current->data); //copy the info
+        head->data = new Type(*(current->data)); //copy the info
+                  // (Dynamically allocating b/c *head is now pointer)
+                  // Allocates new memory for the data member and 
+                  // copies the value from current -> data
+
         head->next = nullptr;        //set the link field of 
                                    //the node to nullptr
         tail = head;              //make last point to the
@@ -338,7 +344,10 @@ void linkedListType<Type>::copyList
         while (current != nullptr)
         {
             newNode = new nodeType<Type>;  //create a node
-            *(newNode->data) = *(current->data); //copy the info
+
+            newNode->data = new Type(*(current->data)); //copy the info
+                    // (Dynamically allocating b/c *head is now pointer)
+
             newNode->next = nullptr;       //set the link of 
                                         //newNode to nullptr
             tail->next = newNode;  //attach newNode after last
