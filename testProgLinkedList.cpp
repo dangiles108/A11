@@ -14,17 +14,6 @@ int main()                                          //Line 4
     cout << "Line 8: Enter integers ending " 
          << "with -999" << endl;                    //Line 8
 
-/*    cin >> num;                                     //Line 9
-
-    while (num != -999)                             //Line 10
-    {                                               //Line 11
-        list1.insertLast(num);                      //Line 12
-        cin >> num;                                 //Line 13
-    }                                               //Line 14
-
-    cout << endl;                                   //Line 15
-*/
-
      cin >> num;
      int *intPtr = new int (num);
 
@@ -38,9 +27,7 @@ int main()                                          //Line 4
 		if (num != -999)
           {
 			intPtr = new int (num);
-
           }
-
 	}
 
     cout << "Line 16: list1: ";                     //Line 16
@@ -72,6 +59,7 @@ int main()                                          //Line 4
     cout << "Line 32: Length of list2: " 
          << list2.length() << endl;                 //Line 32
 
+
     cout << endl << "Line 33: Output list1 " 
          << "using an iterator" << endl;            //Line 33
 
@@ -81,6 +69,10 @@ int main()                                          //Line 4
                              ++it)                  //Line 35
         cout << *it << " ";                         //Line 36
     cout << endl;                                   //Line 37
+
+    cout << "Line 86: Length of list1: " 
+         << list1.length() << endl;                 //Line 86
+
 
     return 0;                                       //Line 38
 }                                                   //Line 39

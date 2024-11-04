@@ -307,12 +307,15 @@ template <class Type>
 void linkedListType<Type>::copyList
                    (const linkedListType<Type>& otherList) 
 {
+    //cout << "Inside copy list..." << endl;
     nodeType<Type> *newNode; //pointer to create a node
     nodeType<Type> *current; //pointer to traverse the list
 
     if (head != nullptr) //if the list is nonempty, make it empty
-       destroyList();
-
+    {
+      cout << "Making list empty" << endl;
+      destroyList();
+    } 
     if (otherList.head == nullptr) //otherList is empty
     {
         head = nullptr;
@@ -379,17 +382,19 @@ linkedListType<Type>::linkedListType
     copyList(otherList);
 }//end copy constructor
 
-         //overload the assignment operator
+//overload the assignment operator
 template <class Type>
 const linkedListType<Type>& linkedListType<Type>::operator=
                       (const linkedListType<Type>& otherList)
 { 
+    //cout << "Inside assignment operator" << endl;
     if (this != &otherList) //avoid self-copy
     {
         copyList(otherList);
     }//end else
 
-     return *this; 
+    //cout << "Leaving overloaded assignment operator" << endl;
+    return *this; 
 }
 
 #endif

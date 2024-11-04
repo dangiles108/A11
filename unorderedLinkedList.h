@@ -65,8 +65,9 @@ bool unorderedLinkedList<Type>::
 template <class Type>
 void unorderedLinkedList<Type>::insertFirst(Type * newItem)
 {
-    nodeType<Type> *newNode = new nodeType<Type>; // create the new node
+    nodeType<Type> *newNode; 
 
+    newNode = new nodeType<Type>; // create the new node
 
     newNode->data = newItem;
 
@@ -86,8 +87,10 @@ void unorderedLinkedList<Type>::insertFirst(Type * newItem)
     count++;                    //increment count
 
     if (tail == nullptr)   //if the list was empty, newNode is also 
-                        //the last node in the list
+    {                    //the last node in the list
         tail = newNode;
+    }
+
 }//end insertFirst
 
 template <class Type>
@@ -109,9 +112,8 @@ void unorderedLinkedList<Type>::insertLast(Type * newItem)
     newNode->next = nullptr;     //set the link field of newNode
                               //to nullptr
 
-    if (head == nullptr)  //if the list is empty, newNode is 
-                        //both the first and last node
-    {
+    if (head == nullptr)  //if the list is empty, newNode is                       
+    {                     //both the first and last node
         head = newNode;
         tail = newNode;
         count++;        //increment count
@@ -131,11 +133,11 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
 {
     nodeType<Type> *current; //pointer to traverse the list
     nodeType<Type> *trailCurrent; //pointer just before current
-    bool found;
+    bool found = false;
 
-    if (head == nullptr)    //Case 1; the list is empty. 
+    if (head == nullptr) {   //Case 1; the list is empty. 
         cout << "Cannot delete from an empty list."
-             << endl;
+             << endl; }
     else
     {
         if (*(head->data) == deleteItem) //Case 2 
@@ -175,9 +177,9 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
                 count--;
 
                 if (tail == current)   //node to be deleted 
-                {                       //was the last node
+                                       //was the last node
                     tail = trailCurrent; //update the value 
-                }                         //of last
+                                         //of last
 
                 //delete current->data;   // Delete data before deleting node
                                     // (since *data is now dynamically allocated)
