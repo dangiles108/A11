@@ -19,14 +19,14 @@ class unorderedLinkedList: public linkedListType<Type>
       	//               list, otherwise the value false is 
       	//               returned.
 
-    	void insertFirst(const Type& newItem);
+    	void insertFirst(Type * newItem);
       	//Function to insert newItem at the beginning of the list.
       	//Postcondition: first points to the new list, newItem is
       	//               inserted at the beginning of the list,
       	//               last points to the last node in the  
       	//               list, and count is incremented by 1.
 
-    	void insertLast(const Type& newItem);
+    	void insertLast(Type * newItem);
       	//Function to insert newItem at the end of the list.
       	//Postcondition: first points to the new list, newItem 
       	//               is inserted at the end of the list,
@@ -63,14 +63,23 @@ bool unorderedLinkedList<Type>::
 }//end search
 
 template <class Type>
-void unorderedLinkedList<Type>::insertFirst(const Type& newItem)
+void unorderedLinkedList<Type>::insertFirst(Type * newItem)
 {
     nodeType<Type> *newNode = new nodeType<Type>; // create the new node
 
-    newNode->data = new Type; // Allocate memory for the data
+
+    newNode->data = newItem;
+
+    // Instead of dynamically allocating a temp var in main(),
+    //  we could & pass a static temp var and dynamically allocated it 
+    //  here, with the below code. 
+    //newNode->data = new Type; // Allocate memory for the data
                             // (because *data is now a pointer)
 
-    *(newNode->data) = newItem;    //store the new item in the node
+
+    //*(newNode->data) = newItem;    //store the new item in the node
+                                    
+
     newNode->next = head;      //insert newNode before first
     head = newNode;            //make first point to the
                                 //actual first node
@@ -82,15 +91,21 @@ void unorderedLinkedList<Type>::insertFirst(const Type& newItem)
 }//end insertFirst
 
 template <class Type>
-void unorderedLinkedList<Type>::insertLast(const Type& newItem)
+void unorderedLinkedList<Type>::insertLast(Type * newItem)
 {
     nodeType<Type> *newNode; //pointer to create the new node
     newNode = new nodeType<Type>; //create the new node
 
-    newNode->data = new Type; // Allocate memory for the data
+    newNode->data = newItem;
+
+    // Instead of dynamically allocating a temp var in main(),
+    //  we could & pass a static temp var and dynamically allocated it 
+    //  here, with the below code. 
+    //newNode->data = new Type; // Allocate memory for the data
                             // (because *data is now a pointer)
 
-    *(newNode->data) = newItem;  //store the new item in the node
+    //*(newNode->data) = newItem;  //store the new item in the node
+
     newNode->next = nullptr;     //set the link field of newNode
                               //to nullptr
 
@@ -131,7 +146,7 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
             if (head == nullptr)    //the list has only one node
                 tail = nullptr;
 
-            delete current->data;   // Delete data before deleting node
+            //delete current->data;   // Delete data before deleting node
                                     // (since *data is now dynamically allocated)
             delete current;
         }
@@ -148,7 +163,7 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
                 if ( *(current->data) != deleteItem) 
                 {
                     trailCurrent = current;
-                    current = current-> next;
+                    current = current->next;
                 }
                 else
                     found = true;
@@ -160,11 +175,11 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
                 count--;
 
                 if (tail == current)   //node to be deleted 
-                                       //was the last node
+                {                       //was the last node
                     tail = trailCurrent; //update the value 
-                                         //of last
-                                         
-                delete current->data;   // Delete data before deleting node
+                }                         //of last
+
+                //delete current->data;   // Delete data before deleting node
                                     // (since *data is now dynamically allocated)
                 delete current;  //delete the node from the list
             }

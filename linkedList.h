@@ -151,14 +151,14 @@ public:
       //               list, otherwise the value false is 
       //               returned.
 
-    virtual void insertFirst(const Type& newItem) = 0;
+    virtual void insertFirst(Type * newItem) = 0;
       //Function to insert newItem at the beginning of the list.
       //Postcondition: first points to the new list, newItem is
       //               inserted at the beginning of the list,
       //               last points to the last node in the list, 
       //               and count is incremented by 1.
 
-    virtual void insertLast(const Type& newItem) = 0;
+    virtual void insertLast(Type * newItem) = 0;
       //Function to insert newItem at the end of the list.
       //Postcondition: first points to the new list, newItem 
       //               is inserted at the end of the list,
@@ -328,8 +328,10 @@ void linkedListType<Type>::copyList
             //copy the first node
         head = new nodeType<Type>;  //create the node
 
-// head->data = current->data;	// If we want shallow copy
-        head->data = new Type(*(current->data)); //copy the info
+        head->data = current->data;	// Shallow copy
+
+        //head->data = new Type(*(current->data)); //copy the info
+                  // If we wanted Deep copy
                   // (Dynamically allocating b/c *head is now pointer)
                   // Allocates new memory for the data member and 
                   // copies the value from current -> data
@@ -346,8 +348,10 @@ void linkedListType<Type>::copyList
         {
             newNode = new nodeType<Type>;  //create a node
 
-// newNode->data = current->data;	// If we want shallow copy
-            newNode->data = new Type(*(current->data)); //copy the info
+            newNode->data = current->data;	// If we want shallow copy
+
+            //newNode->data = new Type(*(current->data)); //copy the info
+                    // If we want Deep Copy
                     // (Dynamically allocating b/c *head is now pointer)
 
             newNode->next = nullptr;       //set the link of 
