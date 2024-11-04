@@ -328,6 +328,7 @@ void linkedListType<Type>::copyList
             //copy the first node
         head = new nodeType<Type>;  //create the node
 
+// head->data = current->data;	// If we want shallow copy
         head->data = new Type(*(current->data)); //copy the info
                   // (Dynamically allocating b/c *head is now pointer)
                   // Allocates new memory for the data member and 
@@ -345,6 +346,7 @@ void linkedListType<Type>::copyList
         {
             newNode = new nodeType<Type>;  //create a node
 
+// newNode->data = current->data;	// If we want shallow copy
             newNode->data = new Type(*(current->data)); //copy the info
                     // (Dynamically allocating b/c *head is now pointer)
 

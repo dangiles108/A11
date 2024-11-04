@@ -13,7 +13,7 @@ int main()                                          //Line 4
 
     cout << "Line 8: Enter integers ending " 
          << "with -999" << endl;                    //Line 8
-    cin >> num;                                     //Line 9
+/*    cin >> num;                                     //Line 9
 
     while (num != -999)                             //Line 10
     {                                               //Line 11
@@ -22,6 +22,19 @@ int main()                                          //Line 4
     }                                               //Line 14
 
     cout << endl;                                   //Line 15
+*/
+
+	while (true) {
+		cin >> num;
+
+		if (num == -999)
+			break;	// Exit loop if termination value entered
+
+		list1.insertLast(num);	// Else, add the value to the list
+
+		cout << "newNode = " << num << " successfully added to list\n"; 
+
+	}
 
     cout << "Line 16: list1: ";                     //Line 16
     list1.print();                                  //Line 17
