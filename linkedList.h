@@ -230,15 +230,15 @@ linkedListType<Type>::linkedListType() //default constructor
 template <class Type>
 void linkedListType<Type>::destroyList()
 {
-    nodeType<Type> *temp;   //pointer to deallocate the memory
-                            //occupied by the node
+    nodeType<Type> *temp;		//pointer to deallocate the memory
+                         		//occupied by the node
     while (head != nullptr)   //while there are nodes in 
-    {                          //the list
-        temp = head;        //set temp to the current node
-        head = head->next; //advance first to the next node
-        delete temp->data; // Delete data before deleting node
-                           // (since *data is now dynamically allocated)
-        delete temp;   //deallocate the memory occupied by temp
+    {                      	//the list
+        temp = head;     		//set temp to the current node
+        head = head->next;		//advance first to the next node
+        delete temp->data;		// Delete data before deleting node
+                          		// (since *data is now dynamically allocated)
+        delete temp;				//deallocate the memory occupied by temp
     }
     tail = nullptr; //initialize last to nullptr; first has 
                //already been set to nullptr by the while loop
